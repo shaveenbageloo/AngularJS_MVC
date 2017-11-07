@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <script src="~/Scripts/angular.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div ng-app="myClients">
+        <div ng-controller="myCtrl" class="container">
+
+            <ul class="unstyled">
+                <li data-ng-repeat="client in clientArray track by $index">
+
+
+                    <div class="input-controls" hidden="hidden">
+                        <h4>ID</h4>
+                        <input name="id" type="number" id="id" data-ng-model="client.id" />
+
+                    </div>
+
+
+
+                    <div class="input-controls">
+                        <h4>Surname:</h4>
+                        <input name="surname" type="text" id="surname" data-ng-model="client.surname" />
+                    </div>
+
+                    <div class="input-controls">
+                        <h4>First Name(s):</h4>
+                        <input name="first" type="text" id="first" data-ng-model="client.firstName" />
+                    </div>
+
+
+
+                    <div class="input-controls">
+                        <h4>Identity Type:</h4>
+
+                        <div class="radio">
+                            <label>
+                                <input type="radio" value="iddoc" data-ng-model="client.idtype" >
+                                Identity Document
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" value="passport" data-ng-model="client.idtype" />
+                                Passport
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-controls">
+                        <h4>Identity Number:</h4>
+                        <input name="idnum" type="number" id="idnum" data-ng-model="client.idNumber" maxlength="13" />
+                    </div>
+
+                    <div class="input-controls">
+                        <h4>Date of Birth (yyyy-MM-dd):</h4>
+                        <input type="text" datetime="yyyy-MM-dd" data-ng-model="client.dob_string" datetime-model="yyyy-MM-dd" />
+                    </div>
+
+                </li>
+            </ul>
+
+            <br />
+            <div class="input-controls">
+                <input type="submit" value="Update Client" ng-click="updateMe()" />
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script>
+        var app = angular.module("myClients", []);
+
+        app.controller("myCtrl", function ($scope) {
+
+            $scope.saved = (localStorage.getItem("clientArray"));
+
+            $scope.clientArray = (localStorage.getItem("clientArray") !== null)
+                ? JSON.parse($scope.saved)
+                : [{
+                    id: 1
+                    ,surname: "Bloggs"
+                    ,firstName: "Joe Peter"
+                    ,idType: "passport"
+                    , idNumber: 7202025074084
+                    , idtype :'iddoc'
+                    , dob_string : "1972-02-02"
+                    
+                }];     
+
+
+
+            $scope.updateMe = function () {      
+
+                var oldclientArray = $scope.clientArray;
+                $scope.clientArray = [];
+                angular.forEach(oldclientArray, function (o) {
+                    $scope.clientArray.push(o);
+                });        
+
+                localStorage.setItem("clientArray", JSON.stringify($scope.clientArray));
+            };
+
+
+
+
+        });
+
+
+    </script>
+
+</body>
+
+
+
+
+
+</html>

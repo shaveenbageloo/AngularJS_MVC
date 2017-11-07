@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<clients>
+
+  <client>
+    <surname>Bloggs</surname>
+    <firstname>Joe Peter</firstname>
+    <idtype>Identity Document</idtype>
+    <idnum>7202025074084</idnum>
+    <dob>1972/02/02</dob>
+  </client>
+  
+</clients>
